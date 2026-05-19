@@ -7,7 +7,9 @@
         "context": "../.."
     },
     "features": {
-        "ghcr.io/prulloac/devcontainer-features/ollama:1": {}
+        "ghcr.io/prulloac/devcontainer-features/ollama:1": {
+            "pull": "gemma4:e4b"
+        }
     },
     // Configure tool-specific properties.
     "customizations": {
@@ -26,7 +28,7 @@
     },
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "cp .env.sample.ollama .env && ollama pull llama3.1",
+    "postCreateCommand": "cp .env.sample.ollama .env",
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode",
