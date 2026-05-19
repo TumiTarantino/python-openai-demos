@@ -137,10 +137,16 @@ OPENAI_MODEL=gpt-4o-mini
 
 ### Usando modelos de Ollama
 
-Instala [Ollama](https://ollama.com/) y descarga un modelo:
+Instala [Ollama](https://ollama.com/) y descarga el modelo recomendado:
 
 ```bash
-ollama pull llama3.1
+ollama pull gemma4:e4b
+```
+
+Otra opcion probada es:
+
+```bash
+ollama pull qwen3.5:4b
 ```
 
 Configura tu `.env`:
@@ -148,10 +154,12 @@ Configura tu `.env`:
 ```bash
 API_HOST=ollama
 OLLAMA_ENDPOINT=http://localhost:11434/v1
-OLLAMA_MODEL=llama3.1
+OLLAMA_MODEL=gemma4:e4b
 ```
 
 Si ejecutas dentro de un Dev Container, reemplaza `localhost` por `host.docker.internal`.
+
+La mayoria de los ejemplos de chat, streaming, function calling, salidas estructuradas, RAG con CSV y flujo RAG con documentos funcionan con modelos de chat locales de Ollama. Los ejemplos de ingesta de documentos y busqueda vectorial hibrida actualmente usan `text-embedding-3-small` para embeddings, asi que esos scripts necesitan embeddings de Azure OpenAI/OpenAI o una actualizacion de codigo antes de poder ejecutarse en una configuracion local solo con Ollama.
 
 ## Recursos
 

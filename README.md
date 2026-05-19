@@ -142,26 +142,42 @@ This project includes infrastructure as code (IaC) to provision Azure OpenAI dep
 
 ## Using Ollama models
 
+Most chat, streaming, function calling, structured outputs, CSV RAG, and document RAG flow samples work with local Ollama chat models. These samples have been tested with `gemma4:e4b` and `qwen3.5:4b`. The document ingestion and hybrid vector search samples currently use `text-embedding-3-small` for embeddings, so those scripts need Azure OpenAI/OpenAI embeddings or a code update before they can run in a local-only Ollama setup. The `reasoning.py` sample is intended for reasoning models, such as `gpt-oss`.
+
+If you use GitHub Codespaces or Dev Containers, you can use the Ollama devcontainer, which installs Ollama and pulls the default model for you:
+
+```text
+https://codespaces.new/Azure-Samples/python-openai-demos?devcontainer_path=.devcontainer/ollama/devcontainer.json
+```
+
 1. Install [Ollama](https://ollama.com/) and follow the instructions to set it up on your local machine.
-2. Pull a model, for example:
+2. Pull the recommended model:
 
     ```shell
-    ollama pull llama3.1
+    ollama pull gemma4:e4b
     ```
 
-3. Create a `.env` file by copying the `.env.sample` file and updating it with your Ollama endpoint and model name.
+    Another tested option is:
+
+    ```shell
+    ollama pull qwen3.5:4b
+    ```
+
+3. Create a `.env` file by copying the Ollama-specific environment sample:
 
     ```bash
-    cp .env.sample .env
+    cp .env.sample.ollama .env
     ```
 
-4. Update the `.env` file with your Ollama endpoint and model name (any model you've pulled):
+4. Update the `.env` file with your Ollama endpoint and model name, if needed:
 
     ```bash
     API_HOST=ollama
     OLLAMA_ENDPOINT=http://localhost:11434/v1
-    OLLAMA_MODEL=llama3.1
+    OLLAMA_MODEL=gemma4:e4b
     ```
+
+Use `http://localhost:11434/v1` when Ollama and Python run in the same environment, including the Ollama devcontainer. If Python runs in a different container and Ollama runs on the host machine, use `http://host.docker.internal:11434/v1` instead.
 
 ## Resources
 
